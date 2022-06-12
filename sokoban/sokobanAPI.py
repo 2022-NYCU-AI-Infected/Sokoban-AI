@@ -36,3 +36,6 @@ class API:
             self.game.move(1, 0, True)
         printGame(self.game.getMatrix(), self.screen, self.assets)
         pygame.display.update()
+
+    def getMap(self):
+        return self.game.getMatrix()
