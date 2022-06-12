@@ -10,7 +10,7 @@ worker_docked = pygame.image.load('images/worker_dock.png')
 docker = pygame.image.load('images/dock.png')
 background = 255, 226, 191
 pygame.init()
-
+assets = {'wall': wall, 'floor': floor, 'box': box, 'box_docked': box_docked, 'worker': worker, 'worker_docked': worker_docked, 'docker': docker, 'background': background}
 level = startGame()
 game = Game('levels', level)
 size = game.loadSize()
@@ -18,7 +18,7 @@ screen = pygame.display.set_mode(size)
 while True:
     if game.isCompleted():
         displayEnd(screen)
-    printGame(game.getMatrix(), screen)
+    printGame(game.getMatrix(), screen, assets)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit(0)
