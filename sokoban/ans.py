@@ -1,4 +1,3 @@
-from concurrent.futures import thread
 import sokobanAPI, solver
 from time import perf_counter as timer
 import threading
@@ -22,8 +21,13 @@ def solve(methodN, level):
 
     
 
-names = ["bfs", "ucs", "astar"]
-for i in range(20, 25):
+names = [
+    # "dfs",
+    "bfs",
+    "ucs",
+    "astar"
+]
+for i in range(1, 24):
     # threads = []
 
     # for name in names:
