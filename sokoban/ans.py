@@ -17,13 +17,13 @@ def solve(methodN, level):
     g.loadLevel()
     ans = method(g.getMatrix())
     end = timer()
-    print(f"{methodN}({level}) {end - start} \n {ans}")
+    print(f"{level},{methodN},{end - start},{ans[1]},{ans[0]}")
     # g.playSeq(ans[0], delay=0.1)
 
     
 
 names = ["bfs", "ucs", "astar"]
-for i in range(8, 10):
+for i in range(20, 25):
     # threads = []
 
     # for name in names:
