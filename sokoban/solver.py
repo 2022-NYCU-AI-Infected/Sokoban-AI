@@ -94,19 +94,19 @@ class solver:
             if state.isFailure():
                 continue
             if len(action) >= maxDepth:
-                continue
+                break
             for (act, _) in state.getPossibleActions():
                 nextState = state.successor(act)
                 if nextState.getHash() in cache and cache[nextState.getHash()] <= len(action) + 1:
                     continue
-                stack.append((state.getNextState(act), action + act))
+                stack.append((nextState, action + act))
         return ("", 0)
 
     def bfs(self, startState, maxDepth=float('inf'), cache={}):
-        return self.ucs(startState, cache=cache, cost="none")
+        return self.ucs(startState=startState, cache=cache, cost="none")
     
     def ucs(self, startState, cache={}, cost="default", maxCost=500):
-        return self.astar(startState, cache=cache, cost=cost, maxCost=maxCost, heuristic="none")
+        return self.astar(startState=startState, cache=cache, cost=cost, maxCost=maxCost, heuristic="none")
 
     def astar(self, startState, cache={}, cost="default", maxCost=1000, heuristic="hungarian"):
         h = self.heuristic[heuristic]
@@ -135,7 +135,7 @@ class solver:
                 if not old or len(old) > len(actions) + 1:
                     action_map[nextState.getHash()] = actions + act
                 nextState.h = h(nextState, self.cache)
-                queue.update(nextState, nextState.h + costDelta + costCalc(costDelta, self.cache) + cost - state.h)
+                queue.update(nextState, nextState.h + costCalc(costDelta, self.cache) + cost - state.h)
         return ("", 0)
                 
         
@@ -147,13 +147,13 @@ class PQ:
         self.map = {}
     
     def update(self, state, cost):
-        oldCost = self.map.get(state.getHash())
+        oldCost = self.map.get(state)
         if oldCost == None or cost < oldCost:
-            self.map[state.getHash()] = cost
+            self.map[state] = cost
             self.queue.put((cost, state))
 
     def pop(self):
-        while len(self.queue) > 0:
+        while not self.queue.empty():
             cost, state = self.queue.get()
             if self.map[state] == -100000:
                 continue
@@ -162,7 +162,7 @@ class PQ:
         return (None, None)
     
     def empty(self):
-        return len(self.queue) == 0
+        return self.queue.empty()
 
     
     
