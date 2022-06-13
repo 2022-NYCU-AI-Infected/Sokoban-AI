@@ -346,10 +346,6 @@ class API:
                         print(f'Invalid character in level {self.level}')
                         # sys.exit(1)
                 self.matrix.append(list(row))
-
-    def getMatrix(self):
-        return self.matrix
-
         max_row_length = 0
         # Iterate all Rows
         for i in range(0, len(self.matrix)):
@@ -362,6 +358,8 @@ class API:
         self.matrix.height = len(self.matrix)
 
     
+    def getMatrix(self):
+        return self.matrix
     
     
     def start(self):
@@ -396,7 +394,4 @@ class API:
                 displayEnd(self.screen)
                 break
 
-
-    def getMap(self):
-        return self.game.getMatrix()
 
