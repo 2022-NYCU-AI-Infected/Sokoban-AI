@@ -94,7 +94,7 @@ class solver:
             if state.isFailure():
                 continue
             if len(action) >= maxDepth:
-                break
+                continue
             for (act, _) in state.getPossibleActions():
                 nextState = state.successor(act)
                 if nextState.getHash() in cache and cache[nextState.getHash()] <= len(action) + 1:
