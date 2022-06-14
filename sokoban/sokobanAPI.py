@@ -390,8 +390,5 @@ class API:
         for direction in sequence:
             self.move(direction)
             time.sleep(delay)
-            if self.game.isCompleted():
-                displayEnd(self.screen)
-                break
 
 
